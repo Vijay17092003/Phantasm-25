@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Footer with Side Menu</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        header, footer {
+            position: relative;
+            background: url('Sky.jpg') no-repeat center center / cover;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        header {
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        header .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #000000;
+        }
+
+        .hamburger {
+            display: none;  /* Hide the hamburger by default */
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 3;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            padding: 10px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 4px 0;
+            transition: all 0.3s;
+        }
+
+        .close-icon {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            z-index: 3;
+            font-size: 2em;
+            color: white;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background: url('Sky.jpg') no-repeat center center / cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .side-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .side-menu a:hover {
+            color: #f0a500;
+        }
+
+        .side-menu.open {
+            right: 0;
+        }
+
+        .ripple {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: ripple-animation 4s infinite;
+            opacity: 0;
+            z-index: 0;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            color: black;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer p {
+            margin: 5px 0;
+            z-index: 10;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes ripple-animation {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex; /* Show hamburger only on mobile view */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none; /* Hide hamburger on desktop and larger screens */
+            }
+
+            header nav {
+                display: flex; /* Show normal navigation on desktop */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Phantasm'25</div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="close-icon" id="closeIcon" onclick="toggleMenu()">&#x2715;</div>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#events">Events</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#contact">Contact</a>
+        <a href="#login">Login</a>
+    </nav>
+    <div class="side-menu" id="sideMenu">
+        <div class="ripple"></div>
+        <div class="ripple"></div>
+        <div class="ripple"></div>
+        <!-- Example folder-based links -->
+        <a href="pages/about.html">About</a>
+        <a href="pages/events.html">Events</a>
+        <a href="pages/schedule.html">Schedule</a>
+        <a href="pages/contact.html">Contact</a>
+        <a href="pages/login.html">Login</a>
+    </div>
+</header>
+
+<main>
+    <!-- Main content goes here -->
+</main>
+
+<footer>
+    <div class="ripple"></div>
+    <div class="ripple"></div>
+    <div class="ripple"></div>
+    <p>&copy; 2025 CSEA. All rights reserved.</p>
+    <p>Follow us on</p>
+    <p>
+        <a href="#">Instagram</a>, <a href="#">Facebook</a>, and <a href="#">Twitter</a>.
+    </p>
+</footer>
+
+<script>
+    // Function to toggle the side menu
+    function toggleMenu() {
+        const sideMenu = document.getElementById('sideMenu');
+        const hamburger = document.getElementById('hamburger');
+        const closeIcon = document.getElementById('closeIcon');
+
+        // Toggle side menu visibility
+        sideMenu.classList.toggle('open');
+
+        // Toggle visibility of hamburger and close icon
+        if (sideMenu.classList.contains('open')) {
+            hamburger.style.display = 'none';
+            closeIcon.style.display = 'block';
+        } else {
+            hamburger.style.display = 'flex';
+            closeIcon.style.display = 'none';
+        }
+    }
+
+    // Function to add ripple effect to a given element
+    function addRippleEffect(element) {
+        setInterval(() => {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = `${Math.random() * 100}%`;
+            ripple.style.top = `${Math.random() * 100}%`;
+            element.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 4000); // Remove the ripple after animation
+        }, 1000);
+    }
+
+    // Add ripple effect to header, footer, and side menu
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    const sideMenu = document.querySelector('.side-menu');
+    addRippleEffect(header);
+    addRippleEffect(footer);
+    addRippleEffect(sideMenu);
+</script>
+
+</body>
+</html>
